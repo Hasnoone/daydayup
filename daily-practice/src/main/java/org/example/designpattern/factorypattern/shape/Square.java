@@ -1,4 +1,4 @@
-package org.example.designpattern.factorypattern;
+package org.example.designpattern.factorypattern.shape;
 
 public class Square implements Shape {
 
