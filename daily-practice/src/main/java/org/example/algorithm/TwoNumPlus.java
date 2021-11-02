@@ -38,26 +38,18 @@ public class TwoNumPlus {
 
     private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = null, tail = null;
-        int carrry = 0;
+        int carry = 0;
         while (null != l1 || null != l2) {
             int num1 = null == l1 ? 0 : l1.val;
             int num2 = null == l2 ? 0 : l2.val;
-            int sum = num1 + num2 + carrry;
+            int sum = num1 + num2 + carry;
             if (null == head) {
 
             } else {
 
             }
-
-
-
-
         }
-
-
-
         return head;
-
     }
 
 
