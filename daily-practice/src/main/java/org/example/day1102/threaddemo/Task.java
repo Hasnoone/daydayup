@@ -13,9 +13,8 @@ public class Task implements Runnable {
 
     @Override
     public void run() {
-
-        for (int i = code; i >= 0; i--) {
-            System.out.println("I'm " + i);
+        for (;;) {
+            System.out.println("I'm "+Thread.currentThread().getName()+"------" + code++);
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
