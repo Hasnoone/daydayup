@@ -10,11 +10,9 @@ public class ThreadDemo {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(ThreadPoolConfig.corePoolSize,
                 ThreadPoolConfig.maximumPoolSize, ThreadPoolConfig.keepAliveTime, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(ThreadPoolConfig.queueSize));
 
-
         CompletableFuture<Void> one = CompletableFuture.runAsync(new Task(5), threadPoolExecutor);
         CompletableFuture<Void> two = CompletableFuture.runAsync(new Task(4), threadPoolExecutor);
         CompletableFuture<Void> three = CompletableFuture.runAsync(new Task(3), threadPoolExecutor);
-
 
         CompletableFuture.allOf(one, two, three);
     }
