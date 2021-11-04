@@ -35,34 +35,19 @@ public class Response {
     public void getOutPutHtml(String path) throws IOException {
         //获取静态资源的绝对路径
         String absoluteResourcePath = StaticResourceUtil.absolutePath(path);
-
         File file = new File(absoluteResourcePath);
-
         if (file.exists() && file.isFile()) {
             //输出静态资源文件
-
             StaticResourceUtil.getOutputStream(new FileInputStream(file), outputStream);
-
         }else {
             //输出404
             output(HttpProtocolUtil.getHttpHeader404());
         }
-
-
-
-
-
-
     }
 
 
     public Response(OutputStream outputStream) {
         this.outputStream = outputStream;
-
-
-
-
-
     }
 
 

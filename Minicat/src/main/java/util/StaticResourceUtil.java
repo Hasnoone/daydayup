@@ -21,25 +21,22 @@ public class StaticResourceUtil {
      * @param outputStream
      */
     public static void getOutputStream(InputStream inputStream, OutputStream outputStream) throws IOException {
-
         int count = 0;
         while (count == 0) {
             count = inputStream.available();
         }
         int resourceSize = count;
-
-
         outputStream.write(HttpProtocolUtil.getHttpHeader200(resourceSize).getBytes());
-
-        int written = 0;
+        long written = 0;
         int byteSize = 1024;
         byte[] bytes = new byte[byteSize];
         while (written < resourceSize) {
             if (written + byteSize > resourceSize) {//剩余文件大小不足1024的长度,那就按真实车的长度处理
-                byteSize = resourceSize - written;//剩余文件长度
+                byteSize = (int) (resourceSize - written);//剩余文件长度
                 bytes = new byte[byteSize];
             }
             inputStream.read(bytes);
+            outputStream.write(bytes);
             outputStream.flush();
             written += byteSize;
         }
