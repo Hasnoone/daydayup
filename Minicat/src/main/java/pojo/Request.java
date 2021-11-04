@@ -21,7 +21,7 @@ public class Request {
         //从输入流获取请求头信息
         //因为此处avaiable可能为0
         int count = 0;
-        if (count == 0) {
+        while (count == 0) {
             count = inputStream.available();
         }
         byte[] bytes = new byte[count];

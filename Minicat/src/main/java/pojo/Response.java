@@ -38,7 +38,7 @@ public class Response {
 
         File file = new File(absoluteResourcePath);
 
-        if (file.exists()) {
+        if (file.exists() && file.isFile()) {
             //输出静态资源文件
 
             StaticResourceUtil.getOutputStream(new FileInputStream(file), outputStream);

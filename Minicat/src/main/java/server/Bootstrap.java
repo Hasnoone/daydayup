@@ -1,6 +1,7 @@
 package server;
 
 import pojo.Request;
+import pojo.Response;
 import util.HttpProtocolUtil;
 
 import java.io.IOException;
@@ -51,13 +52,11 @@ public class Bootstrap {
             while (true) {
                 Socket socket = serverSocket.accept();
                 InputStream inputStream = socket.getInputStream();
-
                 Request request = new Request(inputStream);
-
-
+                Response response = new Response(socket.getOutputStream());
+                response.getOutPutHtml(request.getUrl());
+                socket.close();
             }
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
