@@ -12,10 +12,6 @@ public class AbstractFactoryPatternDemo {
         Car bmw = abstractFactory.getCar("bmw");
         bmw.drive();
 
-
-
-
-
     }
 
 
