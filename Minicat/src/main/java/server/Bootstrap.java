@@ -17,6 +17,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 public class Bootstrap {
 
@@ -39,6 +40,17 @@ public class Bootstrap {
     private void start() {
         //1.0 版本 浏览器请求http://localhost:8080,返回一个固定的字符串 “Hello Minicat”
         loadServlet();
+
+        //定义一个线程池
+        int corePoolSize = 10;
+        int maximumPoolSize = 50;
+        long keepAliveTime = 100L;
+        TimeUnit unit = TimeUnit.MILLISECONDS;
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(50);
+        ThreadFactory threadFactory = Executors.defaultThreadFactory();
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.AbortPolicy();
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize
+        ,maximumPoolSize,keepAliveTime,unit,workQueue,threadFactory,handler);
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -72,7 +84,7 @@ public class Bootstrap {
 
             //加载解析配置文件 调用loadServlet()方法
             //3.0 可以请求动态资源
-            while (true) {
+/*            while (true) {
                 Socket socket = serverSocket.accept();
                 InputStream inputStream = socket.getInputStream();
                 Request request = new Request(inputStream);
@@ -87,7 +99,26 @@ public class Bootstrap {
                     httpServlet.service(request,response);
                 }
                 socket.close();
+            }*/
+
+
+            //4.0 多线程版本
+            //3.0的版本是一个bio的形式.我们来实现一个多线程版本
+/*            while (true) {
+                Socket socket = serverSocket.accept();
+                RequestProcessor requestProcessor = new RequestProcessor(socket, servletMap);
+                requestProcessor.start();
+            }*/
+
+            //5.0 线程池版本
+            while (true) {
+                System.out.println("===多线程改造======");
+                Socket socket = serverSocket.accept();
+                RequestProcessor requestProcessor = new RequestProcessor(socket, servletMap);
+                threadPoolExecutor.execute(requestProcessor);
             }
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
