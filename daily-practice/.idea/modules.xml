@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../local_test_tomcat/local_test_tomcat.iml" filepath="$PROJECT_DIR$/../local_test_tomcat/local_test_tomcat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../web_demo_test_tomcat/web_demo_test_tomcat.iml" filepath="$PROJECT_DIR$/../web_demo_test_tomcat/web_demo_test_tomcat.iml" />
+    </modules>
+  </component>
+</project>

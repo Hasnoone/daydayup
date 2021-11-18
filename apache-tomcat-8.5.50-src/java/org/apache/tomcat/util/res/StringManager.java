@@ -132,6 +132,11 @@ public class StringManager {
             if (bundle != null) {
                 str = bundle.getString(key);
             }
+            try {
+                str = new String(str.getBytes("ISO-8859-1"),"UTF-8");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         } catch (MissingResourceException mre) {
             //bad: shouldn't mask an exception the following way:
             //   str = "[cannot find message associated with key '" + key +
