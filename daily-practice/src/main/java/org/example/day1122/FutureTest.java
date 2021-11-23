@@ -108,29 +108,23 @@ public class FutureTest {
     public void  test() throws ExecutionException, InterruptedException {
 
 
-        CompletableFuture<Void> first = CompletableFuture.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("获取航班号");
+        CompletableFuture<Void> first = CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            System.out.println("获取航班号");
         });
 
 
-        CompletableFuture<Void> second = CompletableFuture.runAsync(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(6000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("定酒店");
+        CompletableFuture<Void> second = CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            System.out.println("定酒店");
         });
 
         CompletableFuture<String> third = first.thenCombine(second, new BiFunction<Void, Void, String>() {
