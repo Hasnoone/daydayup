@@ -1,9 +1,6 @@
 package org.example.day1122;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
+import com.google.common.util.concurrent.*;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -47,15 +44,14 @@ public class FutureTest {
 
     @Test
     public void testFuture() {
-        ExecutorService executorService = Executors. newFixedThreadPool(2);
-        ListenableFutureTask<String> futureTask = ListenableFutureTask.create(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                Thread.sleep(1000);//执行了这段代码后，线程就会结束，不会再继续执行
-                return "执行结果";
-            }
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        ListeningExecutorService listeningExecutorService = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
+
+        ListenableFuture<String> futureTask = listeningExecutorService.submit(() -> {
+//            Thread.sleep(100);//执行了这段代码后，线程就会结束，不会再继续执行
+            return "执行结果";
         });
-        executorService.submit(futureTask);
         Futures.addCallback(futureTask, new FutureCallback<String>() {
             public void onSuccess(@Nullable String s) {
                 System.out.println(s);
@@ -64,7 +60,7 @@ public class FutureTest {
             public void onFailure(Throwable throwable) {
                 System.out.println("失败");
             }
-        },Executors.newSingleThreadScheduledExecutor());
+        },executorService);
     }
 
 

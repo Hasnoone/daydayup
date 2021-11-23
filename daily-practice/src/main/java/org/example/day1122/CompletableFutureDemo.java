@@ -83,14 +83,10 @@ public class CompletableFutureDemo {
 
     @Test
     public void testThenApply() throws ExecutionException, InterruptedException {
-
-
         CompletableFuture<String> firstTaskResult = CompletableFuture.supplyAsync(() -> {
             System.out.println("第一次执行任务");
             return "第一次执行任务的结果";
         });
-
-
         CompletableFuture<String> secondTaskResult = firstTaskResult.thenApply(s -> {
             System.out.println("第一次任务的执行结果：" + s);
             return "第二次执行任务结果";
@@ -131,18 +127,13 @@ public class CompletableFutureDemo {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             return "第一个任务的执行结果";
         });
-
         CompletableFuture<String> secondTask = firstTask.whenComplete((a, throwable) -> {
             System.out.println("当前线程名称：" + Thread.currentThread().getName());
             System.out.println("上个任务执行完啦，还把" + a + "传过来");
         });
-
-
         System.out.println(secondTask.get());
-
     }
 
 
@@ -160,18 +151,12 @@ public class CompletableFutureDemo {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             return "第一个任务的执行结果";
         });
+        CompletableFuture<String> second = firstTask.handle((s, throwable) -> {
+            System.out.println(s);
+            return "第er个任务的执行结果";
 
-
-        CompletableFuture<String> second = firstTask.handle(new BiFunction<String, Throwable, String>() {
-            @Override
-            public String apply(String s, Throwable throwable) {
-                System.out.println(s);
-                return "第er个任务的执行结果";
-
-            }
         });
         System.out.println(second.get());
     }
