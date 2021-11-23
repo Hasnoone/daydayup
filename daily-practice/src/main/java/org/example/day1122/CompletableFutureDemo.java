@@ -8,6 +8,7 @@ import java.util.function.*;
 
 /**
  * https://mp.weixin.qq.com/s?src=11&timestamp=1637563321&ver=3451&signature=M9BqRwcFn6pMM8urvqe8vg8vZsJLviUKOAwLqyO-PBbtIKA0gTTRrkQigy-27iyg1YHb5p7sz0EA9*rbXAeql1DApaALP6OAb05UD6p-7rsFBAxmot*ZzeSnq2s0b65N&new=1
+ * https://mp.weixin.qq.com/s?src=11&timestamp=1637563321&ver=3451&signature=XPk8FjOqpZTjYUrplN4qSpmJStZCPt6e32piI5nAcVMJfiNdASJuqXULvjsGw1PcizH-W-NRwjR0hVzAh5r7BnswM14IdIwppK5fhhwqiBCC6NN3vmGYuike40HTvKB4&new=1
  */
 public class CompletableFutureDemo {
 
