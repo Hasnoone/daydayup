@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.*;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public class FutureTest {
 
@@ -97,4 +99,55 @@ public class FutureTest {
         Future<String> carOrder = executorService.submit(() -> "完成了");
         System.out.println(carOrder.get());
     }
+
+
+    /**
+     * 用CompletableFuture改造上面的例子
+     */
+    @Test
+    public void  test() throws ExecutionException, InterruptedException {
+
+
+        CompletableFuture<Void> first = CompletableFuture.runAsync(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("获取航班号");
+            }
+        });
+
+
+        CompletableFuture<Void> second = CompletableFuture.runAsync(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("定酒店");
+            }
+        });
+
+        CompletableFuture<String> third = first.thenCombine(second, new BiFunction<Void, Void, String>() {
+            @Override
+            public String apply(Void aVoid, Void aVoid2) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return "完成";
+            }
+        });
+
+        System.out.println(third.get());
+
+
+    }
+
 }
