@@ -43,13 +43,13 @@ public class FutureTest {
 
 
     @Test
-    public void testFuture() {
+    public void testFuture() throws InterruptedException {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         ListeningExecutorService listeningExecutorService = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
 
         ListenableFuture<String> futureTask = listeningExecutorService.submit(() -> {
-//            Thread.sleep(100);//执行了这段代码后，线程就会结束，不会再继续执行
+            Thread.sleep(100);//执行了这段代码后，线程就会结束，不会再继续执行
             return "执行结果";
         });
         Futures.addCallback(futureTask, new FutureCallback<String>() {
@@ -61,6 +61,9 @@ public class FutureTest {
                 System.out.println("失败");
             }
         },executorService);
+
+
+//        Thread.sleep(5000);
     }
 
 
