@@ -16,7 +16,7 @@ public class ElasticJobDemo {
 
         //配置任务 (时间时间 定时任务逻辑 调度器)
         JobCoreConfiguration jobCoreConfiguration = JobCoreConfiguration
-                .newBuilder("archive-job", "*/2 * * * * ?", 3)
+                .newBuilder("archive-job", "*/2 * * * * ?", 1)
                 .shardingItemParameters("0=bachelor,1=master,2=doctor")
                 .build();
 
