@@ -1,4 +1,4 @@
-package org.example;
+package org.example.buffer;
 
 import java.nio.ByteBuffer;
 
@@ -20,10 +20,7 @@ public class CreateBufferDemo {
         String content = "hello";
         ByteBuffer wrap = ByteBuffer.wrap(content.getBytes());
         for (int i = 0; i < content.length(); i++) {
-
             System.out.println(wrap.get());
-
-
         }
 
 
