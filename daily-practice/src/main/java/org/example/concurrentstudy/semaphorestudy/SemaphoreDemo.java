@@ -19,9 +19,7 @@ import java.util.concurrent.Semaphore;
  *
  * acquire() Acquires a permit from this semaphore, blocking until one is
  *       available, or the thread
- *
  *  release ：Releases a permit, returning it to the semaphore.
- *
  */
 public class SemaphoreDemo extends Thread {
 
