@@ -18,6 +18,16 @@
 <!--            <groupId>com.lagou.edu</groupId>-->
 <!--            <version>1.0-SNAPSHOT</version>-->
 <!--        </dependency>-->
+
+
+
+        <!--eureka client 客户端依赖引入-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>

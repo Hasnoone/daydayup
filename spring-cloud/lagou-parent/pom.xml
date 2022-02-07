@@ -12,6 +12,7 @@
         <module>lagou-service-autodeliver</module>
         <module>lagou-service-resume</module>
         <module>lagou-cloud-eureka-server-8761</module>
+        <module>lagou-cloud-eureka-server-8762</module>
     </modules>
     <!--打包方式-->
     <packaging>pom</packaging>
@@ -98,6 +99,13 @@
             <version>1.1.1</version>
         </dependency>
         <!--引入Jaxb，结束-->
+
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
