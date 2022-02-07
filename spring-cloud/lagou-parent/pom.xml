@@ -11,6 +11,7 @@
         <module>lagou-service-common</module>
         <module>lagou-service-autodeliver</module>
         <module>lagou-service-resume</module>
+        <module>lagou-cloud-eureka-server-8761</module>
     </modules>
     <!--打包方式-->
     <packaging>pom</packaging>
