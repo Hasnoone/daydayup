@@ -4,6 +4,7 @@ package com.lagou.edu.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class AutodeliverController {
      * @param userId
      * @return
      */
-    @GetMapping("/checkState/{userId}")
+    /*@GetMapping("/checkState/{userId}")
     public Integer findResumeOpenState(@PathVariable Long userId) {
         // TODO 从Eureka Server中获取我们关注的那个服务的实例信息以及接口信息
         // 1、从 Eureka Server中获取lagou-service-resume服务的实例信息（使用客户端对象做这件事）
@@ -54,8 +55,19 @@ public class AutodeliverController {
         // httpclient封装好多内容进行远程调用
         Integer forObject = restTemplate.getForObject(url, Integer.class);
         return forObject;
+    }*/
+
+
+    /**
+     * 使用Ribbon负载均衡
+     * @param userId
+     * @return
+     */
+    @GetMapping("/checkState/{userId}")
+    public Integer findResumeOpenState(@PathVariable Long userId) {
+        // 使用ribbon不需要我们自己获取服务实例然后选择一个那么去访问了（自己的负载均衡）
+        String url = "http://lagou-resume-service/resume/openstate/" + userId;  // 指定服务名
+        Integer forObject = restTemplate.getForObject(url, Integer.class);
+        return forObject;
     }
-
-
-
 }
